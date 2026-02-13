@@ -15,6 +15,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -34,7 +35,7 @@ import com.example.endtropia.ui.theme.SoftPurple
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EntropyScreen() {
+fun EntropyScreen(onBack: () -> Unit) {
     val probabilities = remember { mutableStateListOf("0.5", "0.5") }
     var result by remember { mutableStateOf<EntropyCalculator.EntropyResults?>(null) }
     var sumError by remember { mutableStateOf(false) }
@@ -63,6 +64,11 @@ fun EntropyScreen() {
                             letterSpacing = 1.2.sp
                         )
                     ) 
+                },
+                navigationIcon = {
+                    TextButton(onClick = onBack) {
+                        Text("← Назад", color = ElectricBlue)
+                    }
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = Color.Transparent
@@ -268,8 +274,6 @@ fun ProbabilityInputRow(
         }
     }
 }
-
-// Removed the old AddButton composable as it's merged into the row
 
 
 @Composable

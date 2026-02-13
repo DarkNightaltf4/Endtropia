@@ -4,13 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.animation.Crossfade
+import androidx.compose.runtime.*
 import com.example.endtropia.ui.theme.EndtropiaTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +14,20 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             EndtropiaTheme {
-                EntropyScreen()
+                var currentScreen by remember { mutableStateOf("welcome") }
+                
+                Crossfade(targetState = currentScreen, label = "screenTransition") { screen ->
+                    when (screen) {
+                        "welcome" -> WelcomeScreen(
+                            onNavigateToEntropy = { currentScreen = "entropy" },
+                            onNavigateToCipher = { currentScreen = "cipher" },
+                            onNavigateToDecrypt = { currentScreen = "decrypt" }
+                        )
+                        "entropy" -> EntropyScreen(onBack = { currentScreen = "welcome" })
+                        "cipher" -> CipherScreen(initialDecryptMode = false, onBack = { currentScreen = "welcome" })
+                        "decrypt" -> CipherScreen(initialDecryptMode = true, onBack = { currentScreen = "welcome" })
+                    }
+                }
             }
         }
     }
