@@ -21,11 +21,13 @@ class MainActivity : ComponentActivity() {
                         "welcome" -> WelcomeScreen(
                             onNavigateToEntropy = { currentScreen = "entropy" },
                             onNavigateToCipher = { currentScreen = "cipher" },
-                            onNavigateToDecrypt = { currentScreen = "decrypt" }
+                            onNavigateToDecrypt = { currentScreen = "decrypt" },
+                            onNavigateToArithmetic = { currentScreen = "arithmetic" }
                         )
                         "entropy" -> EntropyScreen(onBack = { currentScreen = "welcome" })
                         "cipher" -> CipherScreen(initialDecryptMode = false, onBack = { currentScreen = "welcome" })
                         "decrypt" -> CipherScreen(initialDecryptMode = true, onBack = { currentScreen = "welcome" })
+                        "arithmetic" -> ArithmeticCodingScreen(onBack = { currentScreen = "welcome" })
                     }
                 }
             }

@@ -28,7 +28,8 @@ import com.example.endtropia.ui.theme.SoftPurple
 fun WelcomeScreen(
     onNavigateToEntropy: () -> Unit,
     onNavigateToCipher: () -> Unit,
-    onNavigateToDecrypt: () -> Unit
+    onNavigateToDecrypt: () -> Unit,
+    onNavigateToArithmetic: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -65,7 +66,7 @@ fun WelcomeScreen(
                 modifier = Modifier.padding(top = 8.dp)
             )
 
-            Spacer(modifier = Modifier.height(64.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
             // Navigation Cards
             MenuCard(
@@ -76,7 +77,7 @@ fun WelcomeScreen(
                 onClick = onNavigateToEntropy
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             MenuCard(
                 title = "Шифрование",
@@ -86,17 +87,27 @@ fun WelcomeScreen(
                 onClick = onNavigateToCipher
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             MenuCard(
                 title = "Дешифрование",
                 subtitle = "Восстановление данных",
-                icon = Icons.Default.Info, // A different icon might be better, like a key
+                icon = Icons.Default.Info,
                 color = NeonCyan,
                 onClick = onNavigateToDecrypt
             )
 
-            Spacer(modifier = Modifier.height(64.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+
+            MenuCard(
+                title = "Арифм. кодирование",
+                subtitle = "Задание 5: КОШКА",
+                icon = Icons.Default.Lock,
+                color = ElectricBlue,
+                onClick = onNavigateToArithmetic
+            )
+
+            Spacer(modifier = Modifier.height(32.dp))
             
             Text(
                 "Выберите модуль для работы",
